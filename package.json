@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node -r dotenv/config .",
-    "dev": "ts-node -r tsconfig-paths/register -r dotenv/config src/bot.ts"
+    "dev:start": "ts-node -r tsconfig-paths/register -r dotenv/config src/bot.ts"
   },
   "keywords": [],
   "author": "",
@@ -34,5 +34,8 @@
     "morgan": "^1.10.0",
     "tmi.js": "^1.8.5",
     "zod": "^3.21.4"
+  },
+  "_moduleAliases": {
+    "@": "dist"
   }
 }
