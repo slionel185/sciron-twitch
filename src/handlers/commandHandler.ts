@@ -7,6 +7,7 @@ import getCommandByChannel from '@/functions/getCommandsByChannel'
 
 export default async function commandHandler(channel: string , userState: ChatUserstate, message: string) {
     const channelName = message.split('#')[1]
+    console.log(channelName)
     const commandName = message.split(' ')[0].split('!')[1]
     const commandSender = userState.username?.toLowerCase()
 
