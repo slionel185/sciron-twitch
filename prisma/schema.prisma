@@ -33,6 +33,7 @@ model Command {
   commandType CommandType
   args        String[]
   active      Boolean
+  createdAt   DateTime    @default(now())
   User        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -45,11 +46,12 @@ model Session {
 }
 
 model User {
-  id            String    @id
+  id            String       @id
   name          String
-  email         String?   @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String
+  accountLevel  AccountLevel @default(STARTER)
   Account       Account[]
   Command       Command[]
   Session       Session[]
@@ -67,4 +69,10 @@ enum CommandType {
   REPLY
   UTILITY
   MODERATION
+}
+
+enum AccountLevel {
+  STARTER
+  HOBBYIST
+  PROFESSIONAL
 }

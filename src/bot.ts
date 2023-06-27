@@ -1,3 +1,6 @@
+// Import alias package
+import 'module-alias/register'
+
 // Import types
 
 // Import packages
@@ -42,7 +45,7 @@ bot.connect().catch((err: any) => {
 bot.on('message', messageHandler)
 
 // Attatch router to app
-app.use('/', router)
+app.use('/api', router)
 
 // Start express app
 app.listen(env.PORT, () => {

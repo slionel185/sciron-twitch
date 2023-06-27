@@ -10,6 +10,10 @@ export default async function join(req: Request, res: Response) {
 
     try {
         await bot.join(req.body.channel)
+        return res.json({
+            error: false,
+            message: 'Joined chat!'
+        })
     } catch(err: any) {
         return res.json({
             error: true,
