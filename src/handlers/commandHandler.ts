@@ -15,7 +15,13 @@ export default async function commandHandler(channel: string , userState: ChatUs
     channelCommands.map(async command => {
         if(channelName.toLowerCase() === commandSender && !command.active) return await bot.say(channel, 'Command not active!')
         
-        if(command.active && command.name.toLowerCase() === commandName.toLowerCase() && command.commandType === 'REPLY') return await reply(channel, command)
+        if(command.name.toLowerCase() === commandName.toLowerCase() && command.commandType === 'REPLY') {
+            if(command.active) {
+                return await reply(channel, command)
+            } else {
+                return await bot.say(channel, 'No')
+            }
+        }
         if(command.name.toLowerCase() === commandName.toLowerCase() && command.commandType === 'UTILITY') return await utility(channel, command)
     })
 }
