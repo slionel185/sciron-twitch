@@ -1,5 +1,5 @@
 // Import alias package
-if (process.env.NODE_ENV === 'production') require('module-alias')
+if (process.env.NODE_ENV === 'production') require('module-alias/register')
 
 // Import types
 
