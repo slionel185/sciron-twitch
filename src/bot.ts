@@ -1,5 +1,5 @@
 // Import alias package
-import 'module-alias/register'
+if (process.env.NODE_ENV === 'production') require('module-alias')
 
 // Import types
 
@@ -9,10 +9,12 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import express from 'express'
 import { Client } from 'tmi.js'
+import * as trpcExpress from '@trpc/server/adapters/express'
 
 // Import local files
-import router from '@/routes/router'
 import { env } from '@/utilities/env'
+import { appRouter } from '@/server/index'
+import { createContext } from '@/server/trpc'
 import messageHandler from '@/handlers/messageHandler'
 
 // Create express app
@@ -45,7 +47,10 @@ bot.connect().catch((err: any) => {
 bot.on('message', messageHandler)
 
 // Attatch router to app
-app.use('/api', router)
+app.use('/trpc', trpcExpress.createExpressMiddleware({
+    router: appRouter,
+    createContext
+}))
 
 // Start express app
 app.listen(env.PORT, () => {
